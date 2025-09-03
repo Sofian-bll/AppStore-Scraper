@@ -1,0 +1,104 @@
+country,name,price,price_formatted,currency,price_eur
+us,ChatGPT Plus,19.99,$19.99,USD,17.17
+us,ChatGPT Pro,200.0,$200.00,USD,171.8
+us,ChatGPT Plus,200.0,$200.00,USD,171.8
+tr,ChatGPT Plus,499.99,"₺499,99",TRY,10.45
+tr,ChatGPT Pro,7999.99,"₺7.999,99",TRY,167.2
+tr,ChatGPT Plus,8999.99,"₺8.999,99",TRY,188.1
+de,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+de,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+de,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+gb,ChatGPT Plus,19.99,£19.99,GBP,22.99
+gb,ChatGPT Pro,200.0,£200.00,GBP,230.0
+gb,ChatGPT Plus,200.0,£200.00,GBP,230.0
+fr,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+fr,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+fr,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+es,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+es,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+es,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+fi,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+fi,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+fi,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+ca,ChatGPT Plus,24.99,$24.99,CAD,15.57
+ca,ChatGPT Pro,249.0,$249.00,CAD,155.13
+ca,ChatGPT Plus,249.0,$249.00,CAD,155.13
+it,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+it,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+it,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+au,ChatGPT Plus,29.99,$29.99,AUD,16.79
+au,ChatGPT Pro,300.0,$300.00,AUD,168.0
+au,ChatGPT Plus,300.0,$300.00,AUD,168.0
+at,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+at,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+at,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+nl,ChatGPT Plus,22.99,"€ 22,99",EUR,22.99
+nl,ChatGPT Pro,229.0,"€ 229,00",EUR,229.0
+nl,ChatGPT Plus,229.0,"€ 229,00",EUR,229.0
+ch,ChatGPT Plus,20.0,CHF 20.00,CHF,21.4
+ch,ChatGPT Pro,200.0,CHF 200.00,CHF,214.0
+ch,ChatGPT Plus,200.0,CHF 200.00,CHF,214.0
+pt,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+pt,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+pt,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+se,ChatGPT Plus,249.0,"249,00 kr",SEK,22.61
+se,ChatGPT Pro,2495.0,"2 495,00 kr",SEK,226.55
+se,ChatGPT Plus,2495.0,"2 495,00 kr",SEK,226.55
+no,ChatGPT Plus,249.0,"249,00 kr",NOK,21.31
+no,ChatGPT Pro,2490.0,"2.490,00 kr",NOK,213.14
+no,ChatGPT Plus,2490.0,"2.490,00 kr",NOK,213.14
+be,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+be,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+be,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+ie,ChatGPT Plus,22.99,€22.99,EUR,22.99
+ie,ChatGPT Pro,229.0,€229.00,EUR,229.0
+ie,ChatGPT Plus,229.0,€229.00,EUR,229.0
+jp,ChatGPT Plus,3000.0,"¥3,000",JPY,17.37
+jp,ChatGPT Pro,30000.0,"¥30,000",JPY,173.7
+jp,ChatGPT Plus,30000.0,"¥30,000",JPY,173.7
+dk,ChatGPT Plus,179.0,"179,00 kr",DKK,23.99
+dk,ChatGPT Pro,1799.0,"1.799,00 kr",DKK,241.07
+dk,ChatGPT Plus,1799.0,"1.799,00 kr",DKK,241.07
+nz,ChatGPT Plus,39.99,$39.99,NZD,20.11
+nz,ChatGPT Pro,400.0,$400.00,NZD,201.2
+nz,ChatGPT Plus,400.0,$400.00,NZD,201.2
+ae,ChatGPT Plus,79.99,AED 79.99,AED,18.72
+ae,ChatGPT Pro,799.99,AED 799.99,AED,187.2
+ae,ChatGPT Plus,799.99,AED 799.99,AED,187.2
+in,ChatGPT Plus,1999.0,"₹ 1,999",INR,19.49
+in,ChatGPT Go,399.0,₹ 399,INR,3.89
+in,ChatGPT Pro,19900.0,"₹ 19,900",INR,194.03
+in,ChatGPT Plus,19900.0,"₹ 19,900",INR,194.03
+sa,ChatGPT Plus,89.99,SAR 89.99,SAR,20.61
+sa,ChatGPT Pro,899.99,SAR 899.99,SAR,206.1
+sa,ChatGPT Plus,899.99,SAR 899.99,SAR,206.1
+br,ChatGPT Plus,99.9,"R$ 99,90",BRL,15.68
+br,ChatGPT Pro,999.9,"R$ 999,90",BRL,156.98
+br,ChatGPT Plus,999.9,"R$ 999,90",BRL,156.98
+mx,ChatGPT Plus,399.0,$399.00,MXN,18.27
+mx,ChatGPT Pro,3999.0,"$3,999.00",MXN,183.15
+mx,ChatGPT Plus,3999.0,"$3,999.00",MXN,183.15
+pl,ChatGPT Plus,99.99,"99,99 zł",PLN,23.5
+pl,ChatGPT Pro,999.99,"999,99 zł",PLN,235.0
+pl,ChatGPT Plus,999.99,"999,99 zł",PLN,235.0
+id,ChatGPT Plus,349000.0,Rp 349ribu,IDR,18.15
+id,ChatGPT Pro,3499000.0,"Rp 3,499juta",IDR,181.95
+id,ChatGPT Plus,3499000.0,"Rp 3,499juta",IDR,181.95
+tw,ChatGPT Plus,690.0,NT$690.00,TWD,19.25
+tw,ChatGPT Pro,6990.0,"NT$6,990.00",TWD,195.02
+tw,ChatGPT Plus,6990.0,"NT$6,990.00",TWD,195.02
+lu,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+lu,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+lu,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+za,ChatGPT Plus,399.99,R399.99,ZAR,19.4
+za,ChatGPT Pro,3999.99,"R3,999.99",ZAR,194.0
+za,ChatGPT Plus,3999.99,"R3,999.99",ZAR,194.0
+cz,ChatGPT Plus,499.0,"499,00 Kč",CZK,20.41
+cz,ChatGPT Pro,4990.0,"4 990,00 Kč",CZK,204.09
+cz,ChatGPT Plus,4990.0,"4 990,00 Kč",CZK,204.09
+gr,ChatGPT Plus,22.99,"22,99 €",EUR,22.99
+gr,ChatGPT Pro,229.0,"229,00 €",EUR,229.0
+gr,ChatGPT Plus,229.0,"229,00 €",EUR,229.0
+ng,ChatGPT Plus,9900.0,"₦ 9,900.00",NGN,5.55
+ng,ChatGPT Pro,299900.0,"₦ 299,900.00",NGN,168.24
+ng,ChatGPT Plus,299900.0,"₦ 299,900.00",NGN,168.24

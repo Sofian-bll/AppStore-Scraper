@@ -33,7 +33,7 @@ params = {
     'sparseLimit[apps:customers-also-bought-apps]': '20',
     'sparseLimit[apps:developer-other-apps]': '20',
 }
-app_id = "6473753684"
+app_id = "6448311069"
 country_codes = [
     "us", "tr", "de", "gb", "fr", "es", "fi", "ca", "it", "au",
     "at", "nl", "ch", "pt", "se", "no", "be", "ie", "jp", "dk",
