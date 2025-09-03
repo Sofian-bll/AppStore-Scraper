@@ -101,7 +101,7 @@ for country in country_codes:
     fetch_in_app_purchases(country)
 
 # Écriture dans le CSV
-with open("in_app_purchases.csv", "w", newline="", encoding="utf-8") as csvfile:
+with open("Claude Price/in_app_purchases.csv", "w", newline="", encoding="utf-8") as csvfile:
     fieldnames = ["country", "name", "price", "price_formatted", "currency"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()

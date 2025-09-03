@@ -1,0 +1,134 @@
+country,name,price,price_formatted,currency,price_eur
+us,Claude Pro - Monthly,20.0,$20.00,USD,17.18
+us,Claude Max 5x - Monthly,124.99,$124.99,USD,107.37
+us,Claude Max 20x - Monthly,249.99,$249.99,USD,214.74
+us,Claude Pro - Annual,214.99,$214.99,USD,184.68
+tr,Claude Pro - Monthly,799.99,"₺799,99",TRY,16.72
+tr,Claude Max 5x - Monthly,4999.99,"₺4.999,99",TRY,104.5
+tr,Claude Max 20x - Monthly,9999.99,"₺9.999,99",TRY,209.0
+tr,Claude Pro - Annual,8699.99,"₺8.699,99",TRY,181.83
+de,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+de,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+de,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+de,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+gb,Claude Pro - Monthly,20.0,£20.00,GBP,23.0
+gb,Claude Max 5x - Monthly,124.99,£124.99,GBP,143.74
+gb,Claude Max 20x - Monthly,249.99,£249.99,GBP,287.49
+gb,Claude Pro - Annual,214.99,£214.99,GBP,247.24
+fr,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+fr,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+fr,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+fr,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+es,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+es,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+es,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+es,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+fi,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+fi,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+fi,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+fi,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+ca,Claude Pro - Monthly,28.0,$28.00,CAD,17.44
+ca,Claude Max 5x - Monthly,174.99,$174.99,CAD,109.02
+ca,Claude Pro - Annual,299.99,$299.99,CAD,186.89
+ca,Claude Max 20x - Monthly,349.99,$349.99,CAD,218.04
+it,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+it,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+it,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+it,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+au,Claude Pro - Monthly,33.99,$33.99,AUD,19.03
+au,Claude Max 5x - Monthly,209.99,$209.99,AUD,117.59
+au,Claude Pro - Annual,369.0,$369.00,AUD,206.64
+au,Claude Max 20x - Monthly,429.0,$429.00,AUD,240.24
+at,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+at,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+at,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+at,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+nl,Claude Pro - Monthly,22.0,"€ 22,00",EUR,22.0
+nl,Claude Max 5x - Monthly,137.99,"€ 137,99",EUR,137.99
+nl,Claude Max 20x - Monthly,274.99,"€ 274,99",EUR,274.99
+nl,Claude Pro - Annual,239.0,"€ 239,00",EUR,239.0
+ch,Claude Pro - Monthly,20.0,CHF 20.00,CHF,21.4
+ch,Claude Max 5x - Monthly,125.0,CHF 125.00,CHF,133.75
+ch,Claude Max 20x - Monthly,250.0,CHF 250.00,CHF,267.5
+ch,Claude Pro - Annual,216.0,CHF 216.00,CHF,231.12
+pt,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+pt,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+pt,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+pt,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+se,Claude Pro - Monthly,249.0,"249,00 kr",SEK,22.61
+se,Claude Max 5x - Monthly,1559.0,"1 559,00 kr",SEK,141.56
+se,Claude Pro - Annual,2690.0,"2 690,00 kr",SEK,244.25
+se,Claude Max 20x - Monthly,3099.0,"3 099,00 kr",SEK,281.39
+no,Claude Pro - Monthly,249.0,"249,00 kr",NOK,21.31
+no,Claude Max 5x - Monthly,1559.0,"1.559,00 kr",NOK,133.45
+no,Claude Pro - Annual,2690.0,"2.690,00 kr",NOK,230.26
+no,Claude Max 20x - Monthly,3099.0,"3.099,00 kr",NOK,265.27
+be,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+be,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+be,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+be,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+ie,Claude Pro - Monthly,22.0,€22.00,EUR,22.0
+ie,Claude Max 5x - Monthly,137.99,€137.99,EUR,137.99
+ie,Claude Max 20x - Monthly,274.99,€274.99,EUR,274.99
+ie,Claude Pro - Annual,239.0,€239.00,EUR,239.0
+jp,Claude Pro - Monthly,3400.0,"¥3,400",JPY,19.69
+jp,Claude Max 5x - Monthly,21400.0,"¥21,400",JPY,123.91
+jp,Claude Pro - Annual,36800.0,"¥36,800",JPY,213.07
+jp,Claude Max 20x - Monthly,42400.0,"¥42,400",JPY,245.5
+dk,Claude Pro - Monthly,179.0,"179,00 kr",DKK,23.99
+dk,Claude Max 5x - Monthly,1119.0,"1.119,00 kr",DKK,149.95
+dk,Claude Max 20x - Monthly,2249.0,"2.249,00 kr",DKK,301.37
+dk,Claude Pro - Annual,1939.0,"1.939,00 kr",DKK,259.83
+nz,Claude Pro - Monthly,40.0,$40.00,NZD,20.12
+nz,Claude Max 5x - Monthly,249.99,$249.99,NZD,125.74
+nz,Claude Pro - Annual,429.99,$429.99,NZD,216.28
+nz,Claude Max 20x - Monthly,499.99,$499.99,NZD,251.49
+ae,Claude Pro - Monthly,79.99,AED 79.99,AED,18.72
+ae,Claude Max 5x - Monthly,499.99,AED 499.99,AED,117.0
+ae,Claude Max 20x - Monthly,999.99,AED 999.99,AED,234.0
+ae,Claude Pro - Annual,859.99,AED 859.99,AED,201.24
+in,Claude Pro - Monthly,1999.0,"₹ 1,999",INR,19.49
+in,Claude Max 5x - Monthly,12499.0,"₹ 12,499",INR,121.87
+in,Claude Max 20x - Monthly,24999.0,"₹ 24,999",INR,243.74
+in,Claude Pro - Annual,21500.0,"₹ 21,500",INR,209.62
+sa,Claude Pro - Monthly,89.99,SAR 89.99,SAR,20.61
+sa,Claude Max 5x - Monthly,559.99,SAR 559.99,SAR,128.24
+sa,Claude Max 20x - Monthly,1119.99,"SAR 1,119.99",SAR,256.48
+sa,Claude Pro - Annual,999.99,SAR 999.99,SAR,229.0
+br,Claude Pro - Monthly,109.9,"R$ 109,90",BRL,17.25
+br,Claude Max 5x - Monthly,689.0,"R$ 689,00",BRL,108.17
+br,Claude Max 20x - Monthly,1369.9,"R$ 1.369,90",BRL,215.07
+mx,Claude Pro - Monthly,399.0,$399.00,MXN,18.27
+mx,Claude Max 5x - Monthly,2499.0,"$2,499.00",MXN,114.45
+mx,Claude Max 20x - Monthly,4999.0,"$4,999.00",MXN,228.95
+pl,Claude Pro - Monthly,99.99,"99,99 zł",PLN,23.5
+pl,Claude Max 5x - Monthly,629.0,"629,00 zł",PLN,147.81
+pl,Claude Max 20x - Monthly,1249.99,"1 249,99 zł",PLN,293.75
+pl,Claude Pro - Annual,1079.99,"1 079,99 zł",PLN,253.8
+id,Claude Pro - Monthly,349000.0,Rp 349ribu,IDR,18.15
+id,Claude Max 5x - Monthly,2199000.0,"Rp 2,199juta",IDR,114.35
+id,Claude Max 20x - Monthly,4349000.0,"Rp 4,349juta",IDR,226.15
+id,Claude Pro - Annual,3799000.0,"Rp 3,799juta",IDR,197.55
+tw,Claude Pro - Monthly,690.0,NT$690.00,TWD,19.25
+tw,Claude Max 5x - Monthly,4300.0,"NT$4,300.00",TWD,119.97
+tw,Claude Max 20x - Monthly,8600.0,"NT$8,600.00",TWD,239.94
+tw,Claude Pro - Annual,7450.0,"NT$7,450.00",TWD,207.86
+lu,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+lu,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+lu,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+lu,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+za,Claude Pro - Monthly,399.99,R399.99,ZAR,19.4
+za,Claude Max 5x - Monthly,2499.99,"R2,499.99",ZAR,121.25
+za,Claude Max 20x - Monthly,4999.99,"R4,999.99",ZAR,242.5
+za,Claude Pro - Annual,4349.99,"R4,349.99",ZAR,210.97
+cz,Claude Pro - Monthly,499.0,"499,00 Kč",CZK,20.41
+cz,Claude Max 5x - Monthly,3100.0,"3 100,00 Kč",CZK,126.79
+cz,Claude Max 20x - Monthly,6199.0,"6 199,00 Kč",CZK,253.54
+cz,Claude Pro - Annual,5390.0,"5 390,00 Kč",CZK,220.45
+gr,Claude Pro - Monthly,22.0,"22,00 €",EUR,22.0
+gr,Claude Max 5x - Monthly,137.99,"137,99 €",EUR,137.99
+gr,Claude Max 20x - Monthly,274.99,"274,99 €",EUR,274.99
+gr,Claude Pro - Annual,239.0,"239,00 €",EUR,239.0
+ng,Claude Pro - Monthly,14900.0,"₦ 14,900.00",NGN,8.36
+ng,Claude Max 5x - Monthly,100000.0,"₦ 100,000.00",NGN,56.1
+ng,Claude Max 20x - Monthly,200000.0,"₦ 200,000.00",NGN,112.2
