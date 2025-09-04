@@ -1,5 +1,6 @@
 import requests
 import csv
+import sys
 
 from request import country_code
 
@@ -33,7 +34,7 @@ params = {
     'sparseLimit[apps:customers-also-bought-apps]': '20',
     'sparseLimit[apps:developer-other-apps]': '20',
 }
-app_id = "6448311069"
+app_id = "6503428327"
 country_codes = [
     "us", "tr", "de", "gb", "fr", "es", "fi", "ca", "it", "au",
     "at", "nl", "ch", "pt", "se", "no", "be", "ie", "jp", "dk",
@@ -96,12 +97,21 @@ def fetch_in_app_purchases(country):
         catch_error()
 
 
-# Boucle sur tous les pays
-for country in country_codes:
+# Boucle sur tous les pays avec barre de progression
+total_countries = len(country_codes)
+for i, country in enumerate(country_codes, 1):
+    # Affichage de la progression en temps réel
+    progress = (i / total_countries) * 100
+    sys.stdout.write(f"\r🌍 Fetching country {i}/{total_countries} ({progress:.1f}%): {country.upper()} ")
+    sys.stdout.flush()
+    
     fetch_in_app_purchases(country)
 
+# Nouvelle ligne après la barre de progression
+print("\n")
+
 # Écriture dans le CSV
-with open("Claude Price/in_app_purchases.csv", "w", newline="", encoding="utf-8") as csvfile:
+with open("App Price/in_app_purchases.csv", "w+", newline="", encoding="utf-8") as csvfile:
     fieldnames = ["country", "name", "price", "price_formatted", "currency"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()

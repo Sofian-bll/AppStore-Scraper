@@ -135,8 +135,8 @@ def main():
     """
     Fonction principale
     """
-    input_file = "Claude Price/in_app_purchases.csv"
-    output_file = "Claude Price/in_app_purchases_with_eur.csv"
+    input_file = "App Price/in_app_purchases.csv"
+    output_file = "App Price/Raycast Price.csv"
     
     print("=== CONVERTISSEUR DE PRIX EN EUROS ===\n")
     
