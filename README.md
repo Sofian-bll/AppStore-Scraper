@@ -1,4 +1,4 @@
-# App Store Price Scraper v2
+# App Store Price Scraper
 
 > Note: Au moment de ce projet, j'étais à ma 2e semaine d'apprentissage de Python.
 
