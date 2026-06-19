@@ -95,7 +95,22 @@ code, pre { font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
+.glass:hover { transform: translateY(-2px); border-color: var(--peach); }
+a:active, button:active { transform: scale(0.97); transition: transform 0.1s ease; }
+
+#back-to-top {
+  position: fixed; bottom: 24px; right: 24px; z-index: 50;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(16px); pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+#back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+#back-to-top:hover { color: var(--peach); border-color: var(--peach); }
 
 .pulse-dot { animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite; }
 
@@ -120,7 +135,8 @@ code, pre { font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .pulse-dot { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  .reveal, .pulse-dot, #back-to-top { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+  .glass:hover { transform: none !important; }
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -134,26 +150,40 @@ code, pre { font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono
 <div class="fixed inset-0 radial-2 pointer-events-none z-0"></div>
 
 <!-- @section nav -->
-<header class="sticky top-0 z-50 bg-[#0a0908ee] backdrop-blur-md border-b border-border transition-colors">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-    <a href="#" class="flex items-center gap-3 group shrink-0" aria-label="AppStore-PriceScraper home">
-      <img src="assets/logo.png" alt="Logo" class="w-10 h-10 rounded-lg">
-      <span class="font-semibold text-[15px] whitespace-nowrap text-text group-hover:text-peach transition-colors">AppStore-PriceScraper</span>
+<nav class="sticky top-0 z-50 bg-[#0a0908]/80 backdrop-blur-md border-b border-border py-2 px-6">
+  <div class="max-w-6xl mx-auto flex items-center justify-end gap-3">
+    <a href="https://github.com/Sofian-bll/AppStore-Scraper" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs font-medium text-muted hover:text-text transition-colors px-3 py-1.5 rounded-full border border-border hover:border-peach/30">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
     </a>
-    <div class="flex items-center gap-2 flex-shrink-0">
-      <button id="theme-toggle" class="p-2 rounded-full hover:bg-surface transition-colors text-muted hover:text-text" aria-label="Toggle theme">
-        <svg id="sun-icon" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg id="moon-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-      </button>
-      <a href="git@github.com:Sofian-bll/AppStore-Scraper.git" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs font-medium text-muted hover:text-text transition-colors px-3 py-1.5 rounded-full border border-border hover:border-peach/30">
-        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <span class="flex items-center gap-1.5 text-xs font-mono text-peach border border-peach/30 px-3 py-1.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-peach pulse-dot"></span>v1.0.0</span>
+    <span class="flex items-center gap-1.5 text-xs font-mono text-peach border border-peach/30 px-3 py-1.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-peach pulse-dot"></span>v1.0.0</span>
+    <button id="theme-toggle" class="p-2 rounded-full hover:bg-surface transition-colors text-muted hover:text-text" aria-label="Toggle theme">
+      <svg id="sun-icon" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="moon-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+<!-- /@section nav -->
+
+<!-- @section header -->
+<header class="pt-16 pb-12 text-center">
+  <div class="max-w-4xl mx-auto px-6 flex flex-col items-center gap-5">
+    <a href="README.md" class="text-[10px] font-mono font-bold uppercase tracking-wider text-muted hover:text-text transition-colors">Read in English</a> <span class="text-border">|</span> <a href="README.fr.md" class="text-[10px] font-mono font-bold uppercase tracking-wider text-muted hover:text-text transition-colors">Lire en français</a>
+    <div class="flex items-center justify-center gap-2 flex-wrap">
+      <img src="https://img.shields.io/badge/license-MIT-brightgreen?style=flat" alt="License: MIT" class="h-5">
+        <img src="https://img.shields.io/github/v/release/Sofian-bll/AppStore-Scraper?style=flat" alt="Version: v1.0.0" class="h-5">
+        <img src="https://img.shields.io/github/stars/Sofian-bll/AppStore-Scraper?style=flat" alt="GitHub stars" class="h-5">
+    </div>
+    <div class="w-16 h-16 rounded-2xl overflow-hidden">
+      <img src="assets/logo.png" alt="AppStore-PriceScraper" class="w-full h-full object-contain">
+    </div>
+    <div class="flex items-center justify-center gap-2 flex-wrap">
+      <img src="https://img.shields.io/badge/requests-%23000000.svg?style=flat&logo=python&logoColor=white" alt="Requests" class="h-5">
+        <img src="https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white" alt="Pandas" class="h-5">
     </div>
   </div>
 </header>
-<!-- /@section nav -->
+<!-- /@section header -->
 
 <main class="flex-1">
 
@@ -177,37 +207,9 @@ code, pre { font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono
       </p>
       <div class="flex flex-col sm:flex-row gap-4 mb-16">
         <a href="#quick-start" class="px-8 py-3 rounded-full font-bold text-sm text-[#0a0908] bg-gradient-to-br from-peach to-pink hover:opacity-90 transition-opacity">Get Started</a>
-        <a href="git@github.com:Sofian-bll/AppStore-Scraper.git" target="_blank" rel="noopener noreferrer" class="px-8 py-3 rounded-full font-bold text-sm text-text border border-border hover:border-peach/30 hover:bg-surface transition-colors">View on GitHub</a>
+        <a href="https://github.com/Sofian-bll/AppStore-Scraper" target="_blank" rel="noopener noreferrer" class="px-8 py-3 rounded-full font-bold text-sm text-text border border-border hover:border-peach/30 hover:bg-surface transition-colors">View on GitHub</a>
       </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-3xl mx-auto pt-12 reveal visible" style="transition-delay:.15s">
-<div class="glass rounded-xl p-4 flex items-center gap-3 text-left">
-          <div class="w-9 h-9 rounded-lg bg-peach/10 text-peach flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/></svg>
-          </div>
-          <div class="min-w-0">
-            <div class="text-sm"><span class="font-bold text-lg text-peach leading-tight">36</span> <span class="font-semibold text-text">Countries</span></div>
-            <div class="text-[11px] text-muted mt-0.5 leading-tight">App Store regions covered worldwide.</div>
-          </div>
-        </div>
-<div class="glass rounded-xl p-4 flex items-center gap-3 text-left">
-          <div class="w-9 h-9 rounded-lg bg-pink/10 text-pink flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          </div>
-          <div class="min-w-0">
-            <div class="text-sm"><span class="font-bold text-lg text-pink leading-tight">3</span> <span class="font-semibold text-text">Phases</span></div>
-            <div class="text-[11px] text-muted mt-0.5 leading-tight">From hand-coded v1 to multi-layer v3.</div>
-          </div>
-        </div>
-<div class="glass rounded-xl p-4 flex items-center gap-3 text-left">
-          <div class="w-9 h-9 rounded-lg bg-purple/10 text-purple flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <div class="min-w-0">
-            <div class="text-sm"><span class="font-bold text-lg text-purple leading-tight">30+</span> <span class="font-semibold text-text">Currencies</span></div>
-            <div class="text-[11px] text-muted mt-0.5 leading-tight">Real-time EUR conversion included.</div>
-          </div>
-        </div>
-      </div>
+      
       
     </div>
   </div>
@@ -223,80 +225,19 @@ code, pre { font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono
 <!-- STORY — glass cards with connector dots                       -->
 <!-- ============================================================ -->
 
-<!-- @section story-horizontal -->
-<!-- Use when ≤2 items — horizontal side-by-side layout -->
-<section class="py-20 border-t border-border">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-      <h2 class="headline text-3xl md:text-4xl font-bold mb-4">Project Evolution</h2>
-      
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-            <div class="reveal visible glass rounded-2xl p-6 flex flex-col" style="transition-delay:0.0s">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-[10px] font-mono font-bold uppercase tracking-wider border border-peach/40 text-peach px-2 py-0.5 rounded-full">v1.0.0</span>
-          <span class="text-[10px] font-mono font-bold tracking-wider text-muted uppercase"></span>
-        </div>
-        <p class="text-sm text-muted leading-relaxed mb-4 flex-1">Release v1.0.0</p>
-        
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /@section story-horizontal -->
 
 
 <!-- ============================================================ -->
 <!-- FEATURES — glass cards with colored icon containers           -->
 <!-- ============================================================ -->
 
-<!-- @section features -->
-<section class="py-20 border-t border-border">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-      <h2 class="headline text-3xl md:text-4xl font-bold mb-4">Features</h2>
-      
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="reveal visible glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:0.0s">
-        <div class="w-10 h-10 rounded-xl bg-peach/10 text-peach flex items-center justify-center">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/></svg>
-        </div>
-        <h3 class="font-bold text-lg">36 Country Coverage</h3>
-        <p class="text-muted text-sm leading-relaxed">Scrapes IAP prices from every Apple App Store region, including emerging markets.</p>
-      </div>
-      <div class="reveal visible glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:0.1s">
-        <div class="w-10 h-10 rounded-xl bg-pink/10 text-pink flex items-center justify-center">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <h3 class="font-bold text-lg">Real-Time Currency Conversion</h3>
-        <p class="text-muted text-sm leading-relaxed">Converts all prices to EUR using live exchange rates via a free API.</p>
-      </div>
-      <div class="reveal visible glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:0.2s">
-        <div class="w-10 h-10 rounded-xl bg-purple/10 text-purple flex items-center justify-center">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-        </div>
-        <h3 class="font-bold text-lg">Structured CSV Output</h3>
-        <p class="text-muted text-sm leading-relaxed">Clean, analysis-ready CSV files — one per app — organized by country and currency.</p>
-      </div>
-      <div class="reveal visible glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:0.3s">
-        <div class="w-10 h-10 rounded-xl bg-peach/10 text-peach flex items-center justify-center">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        </div>
-        <h3 class="font-bold text-lg">Transparent Attribution</h3>
-        <p class="text-muted text-sm leading-relaxed">Clear separation of hand-coded vs AI-assisted code with evolution timeline.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /@section features -->
 
 <!-- ============================================================ -->
 <!-- QUICK START — CLI tool (macOS terminal panels)               -->
 <!-- ============================================================ -->
 
 <!-- @section quick-cli -->
-<section id="quick-start" class="py-20 border-t border-border">
+<section id="quick-start" class="py-20">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-16 reveal">
       <h2 class="headline text-3xl md:text-4xl font-bold mb-4">Quick Start</h2>
@@ -355,7 +296,7 @@ code, pre { font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono
 <!-- ============================================================ -->
 
 <!-- @section architecture -->
-<section class="py-20 border-t border-border">
+<section class="py-20">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-16 reveal">
       <h2 class="headline text-3xl md:text-4xl font-bold mb-4">Architecture</h2>
@@ -399,7 +340,7 @@ code, pre { font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono
 <!-- ============================================================ -->
 
 <!-- @section footer -->
-<footer class="border-t border-border py-8 px-6">
+<footer class="py-8 px-6">
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
     <div>MIT License &copy; 2026 Sofian</div>
     <div class="flex items-center gap-2">
@@ -463,6 +404,21 @@ document.querySelectorAll('[data-copy]').forEach(function(btn) {
 </script>
 
 
+
+<script>
+// Back to top
+(function() {
+  var btt = document.getElementById('back-to-top');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 500) btt.classList.add('visible');
+    else btt.classList.remove('visible');
+  }, {passive: true});
+})();
+</script>
+
+<button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
 
 </body>
 </html>
