@@ -1,287 +1,552 @@
 <!doctype html>
-<html lang="en" data-theme="dim">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>App Store Price Scraper</title>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: { extend: {
-    fontFamily: {
-      sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
-      mono: ['"SF Mono"', 'Consolas', 'monospace'],
-    },
-    colors: {
-      bg: '#0a0908',
-      text: '#f5f0eb',
-      muted: 'rgba(245,240,235,0.58)',
-      peach: '#ffb347',
-      pink: '#ff6b6b',
-      purple: '#6c5ce7'
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Store Price Scraper — Scrape IAP prices across 36 countries</title>
+  <meta name="description" content="Collect and analyze in-app purchase prices from Apple's App Store across 36 countries and 30+ currencies.">
+  <meta name="theme-color" content="#0a0908">
+
+  <meta property="og:title" content="App Store Price Scraper">
+  <meta property="og:description" content="Collect and analyze in-app purchase prices from Apple's App Store across 36 countries.">
+  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="App Store Price Scraper">
+  <meta name="twitter:description" content="Collect and analyze in-app purchase prices from Apple's App Store across 36 countries.">
+  <meta name="twitter:image" content="assets/logo.png">
+
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#0a0908',
+            surface: '#131110',
+            elevated: '#1a1715',
+            border: '#2a2725',
+            text: '#f5f0eb',
+            muted: 'rgba(245,240,235,0.58)',
+            peach: '#ffb347',
+            pink: '#ff6b6b',
+            purple: '#6c5ce7',
+            'brand-gradient': 'linear-gradient(135deg, #ffb347, #ff6b6b)',
+          }
+        }
+      }
     }
-  }}
-}
-</script>
-<style>
-[data-theme="dim"] {
-  --color-primary: var(--color-peach, #ffb347);
-  --color-primary-content: #0a0908;
-  --color-base-100: #0a0908;
-  --color-base-200: color-mix(in srgb, #0a0908 92%, white);
-  --color-base-300: color-mix(in srgb, #0a0908 84%, white);
-  --color-base-content: #f5f0eb;
-  --color-neutral: #0a0908;
-  --radius-box: 1.5rem;
-  --radius-field: 999px;
-  --radius-selector: 0.75rem;
-}
-body {
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(255,179,71,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(255,107,107,0.05) 0%, transparent 60%);
-}
-.reveal { opacity: 0; transform: translateY(20px); transition: all .6s ease-out; }
-.reveal.visible { opacity: 1; transform: none; }
-@keyframes pulse { 50% { opacity: .4; transform: scale(.96); } }
-@media (prefers-reduced-motion: reduce) {
-  .reveal { transition: none; }
-  .reveal.visible { opacity: 1; transform: none; }
-}
-</style>
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0908;
+      --surface: #131110;
+      --elevated: #1a1715;
+      --border: #2a2725;
+      --text: #f5f0eb;
+      --muted: rgba(245,240,235,0.58);
+      --peach: #ffb347;
+      --pink: #ff6b6b;
+      --purple: #6c5ce7;
+
+      --light-bg: #faf8f5;
+      --light-surface: #ffffff;
+      --light-elevated: #f0ede8;
+      --light-border: #e0dbd3;
+      --light-text: #1a1815;
+      --light-muted: rgba(26,24,21,0.55);
+    }
+
+    .light {
+      --bg: #faf8f5;
+      --surface: #ffffff;
+      --elevated: #f0ede8;
+      --border: #e0dbd3;
+      --text: #1a1815;
+      --muted: rgba(26,24,21,0.55);
+    }
+
+    .light .glass {
+      background: rgba(255,255,255,0.60);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .light header {
+      background: rgba(250,248,245,0.92);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .headline {
+      font-family: -apple-system, "SF Compact Display", "Helvetica Neue", sans-serif;
+      font-stretch: condensed;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    code, pre {
+      font-family: "SF Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .pulse-dot {
+      animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.6); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .radial-1 {
+      background: radial-gradient(ellipse 80% 60% at 20% 0%, rgba(255,179,71,0.07) 0%, transparent 60%);
+    }
+
+    .radial-2 {
+      background: radial-gradient(ellipse 60% 50% at 85% 100%, rgba(108,92,231,0.05) 0%, transparent 60%);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--peach);
+      outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .pulse-dot {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+  </style>
 </head>
-<body class="min-h-dvh flex flex-col">
+<body class="min-h-dvh flex flex-col antialiased relative overflow-x-hidden">
 
-<!-- NAV -->
-<nav class="navbar bg-base-100 border-b border-base-300 sticky top-0 z-50">
-  <div class="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-6 w-full">
-    <div class="flex-1">
-      <a href="#" class="flex items-center gap-3">
-        <img src="assets/logo.png" alt="Logo" class="w-12 h-12 rounded-box">
-        <span class="font-semibold text-base-content">App Store Price Scraper</span>
+  <div class="fixed inset-0 radial-1 pointer-events-none z-0"></div>
+  <div class="fixed inset-0 radial-2 pointer-events-none z-0"></div>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-[rgba(10,9,8,0.94)] backdrop-blur-md border-b border-white/5 transition-colors">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <a href="#" class="flex items-center gap-3 group shrink-0" aria-label="App Store Price Scraper home">
+        <img src="assets/logo.png" alt="App Store Price Scraper logo" width="40" height="40" class="rounded-lg object-contain">
+        <span class="font-semibold text-[15px] whitespace-nowrap text-text group-hover:text-peach transition-colors">App Store Price Scraper</span>
       </a>
-    </div>
-    <div class="flex-none gap-2">
-      <a href="https://github.com/Sofian-bll/App-Store-Price---Scraper-v2" class="btn btn-ghost btn-sm" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <span class="badge badge-sm badge-soft">v1.0.0</span>
-    </div>
-  </div>
-</nav>
 
-<main class="flex-1">
+      <div class="flex items-center gap-2 flex-shrink-0">
 
-<!-- HERO -->
-<section class="hero min-h-dvh">
-  <div class="hero-content text-center max-w-5xl mx-auto px-6">
-    <div class="max-w-2xl reveal">
-      <div class="badge badge-ghost gap-2 mb-6">
-        <span class="w-2 h-2 rounded-full bg-peach" style="animation: pulse 2s ease-in-out infinite;"></span>
-        Python CLI Tool
-      </div>
-      <h1 class="text-5xl md:text-6xl font-black tracking-tight uppercase text-base-content mb-6">
-        App Store<br>Price Scraper
-      </h1>
-      <p class="text-lg text-base-content/60 max-w-2xl mb-8">
-        Collect and analyze in-app purchase prices from Apple's App Store across countries and currencies.
-      </p>
-      <div class="flex flex-wrap gap-4 justify-center mb-12">
-        <a href="#quick-start" class="btn btn-primary bg-gradient-to-br from-peach to-pink text-bg border-0">Get Started</a>
-        <a href="https://github.com/Sofian-bll/App-Store-Price---Scraper-v2" class="btn btn-ghost">View on GitHub</a>
+        <!-- THEME TOGGLE -->
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-surface transition-colors text-muted hover:text-text" aria-label="Toggle theme">
+          <svg id="sun-icon" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg id="moon-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+
+        <a href="https://github.com/Sofian-bll/AppStore-Scraper" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs font-medium text-muted hover:text-text transition-colors px-3 py-1.5 rounded-full border border-border hover:border-peach/30">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+
+        <a href="https://github.com/Sofian-bll/AppStore-Scraper/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs font-mono text-peach border border-peach/30 px-3 py-1.5 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-peach pulse-dot"></span>
+          v1.0.0
+        </a>
       </div>
     </div>
+  </header>
 
-    <div class="stats stats-vertical lg:stats-horizontal shadow bg-base-200 border border-base-300 reveal" style="transition-delay: .15s">
-      <div class="stat">
-        <div class="stat-title text-base-content/60">Countries</div>
-        <div class="stat-value text-primary">36</div>
-        <div class="stat-desc text-base-content/40">simultaneous scraping</div>
+  <main class="flex-1">
+    <!-- HERO -->
+    <section class="relative pt-20 pb-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center flex flex-col items-center reveal">
+          <div class="flex items-center gap-2 text-muted uppercase tracking-[0.2em] text-[10px] font-bold mb-6">
+            <span class="w-1.5 h-1.5 bg-peach rounded-full pulse-dot"></span>
+            Python CLI Tool
+          </div>
+          <h1 class="headline text-5xl md:text-7xl font-bold leading-[0.95] mb-6 max-w-3xl">
+            App Store<br>Price Scraper
+          </h1>
+          <p class="text-muted text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+            Collect and analyze in-app purchase prices from Apple's App Store across 36 countries and 30+ currencies. Built during the 2nd week of learning Python.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 mb-16">
+            <a href="#quick-start" class="px-8 py-3 rounded-full font-bold text-sm text-bg bg-gradient-to-br from-peach to-pink hover:opacity-90 transition-opacity focus-ring">
+              Get started
+            </a>
+            <a href="https://github.com/Sofian-bll/AppStore-Scraper" target="_blank" rel="noopener noreferrer" class="px-8 py-3 rounded-full font-bold text-sm text-text border border-border hover:border-peach/30 hover:bg-surface transition-colors">
+              View on GitHub
+            </a>
+          </div>
+
+          <!-- STATS -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-left border-t border-white/5 pt-12 reveal" style="transition-delay:.15s">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-peach/10 text-peach flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10M12 2a15.3 15.3 0 00-4 10 15.3 15.3 0 004 10"/>
+                </svg>
+              </div>
+              <div>
+                <div class="font-bold text-2xl text-peach mb-1">36</div>
+                <div class="text-sm font-semibold text-text">Countries</div>
+                <div class="text-xs text-muted mt-1">Simultaneous scraping across Apple's worldwide stores.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-pink/10 text-pink flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="16 3 21 3 21 8"/>
+                  <line x1="4" y1="20" x2="21" y2="3"/>
+                  <polyline points="21 16 21 21 16 21"/>
+                  <line x1="15" y1="15" x2="21" y2="21"/>
+                  <line x1="4" y1="4" x2="9" y2="9"/>
+                </svg>
+              </div>
+              <div>
+                <div class="font-bold text-2xl text-pink mb-1">3</div>
+                <div class="text-sm font-semibold text-text">Evolution Phases</div>
+                <div class="text-xs text-muted mt-1">Hand-coded foundation → AI-assisted scaling → live EUR conversion.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-purple/10 text-purple flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <line x1="12" y1="1" x2="12" y2="23"/>
+                  <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="font-bold text-2xl text-purple mb-1">30+</div>
+                <div class="text-sm font-semibold text-text">Currencies</div>
+                <div class="text-xs text-muted mt-1">Auto-converted to EUR via live exchange rates with caching.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREENSHOT -->
+          <div class="reveal w-full max-w-4xl mx-auto mt-16" style="transition-delay:.25s">
+            <div class="relative border border-border rounded-[20px] p-1 overflow-hidden group hover:border-peach/30 transition-colors">
+              <div class="flex items-center gap-1.5 px-4 py-3 rounded-t-[18px] bg-surface border-b border-border">
+                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                <span class="text-[10px] text-muted ml-2 font-mono uppercase">Terminal Output</span>
+              </div>
+              <div class="w-full bg-[#050403] rounded-b-[18px] overflow-hidden flex items-center justify-center p-2">
+                <img src="assets/screenshot.png" alt="App Store Price Scraper terminal output" class="w-full h-auto object-contain select-none rounded-lg" loading="eager">
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-title text-base-content/60">Phases</div>
-        <div class="stat-value text-primary">3</div>
-        <div class="stat-desc text-base-content/40">hand-coded → AI-assisted</div>
+    </section>
+
+    <!-- STORY -->
+    <section class="py-20 border-t border-white/5">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+          <h2 class="headline text-3xl md:text-4xl font-bold mb-4">Project Evolution</h2>
+          <p class="text-muted">Built during the 2nd week of learning Python — from hand-coded foundations to AI-assisted scaling.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-0">
+          <!-- V1 -->
+          <div class="reveal group relative" style="transition-delay:0s">
+            <div class="glass rounded-2xl p-6 h-full flex flex-col">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-wider border border-peach/40 text-peach px-2 py-0.5 rounded-full">V1</span>
+                <span class="text-[10px] font-mono font-bold tracking-wider text-muted uppercase">Hand-Coded</span>
+              </div>
+              <p class="text-sm text-muted leading-relaxed mb-4 flex-1">Original single-country scraper with console output. Built from scratch as a Python learning exercise.</p>
+              <code class="text-xs text-peach font-mono">request.py</code>
+            </div>
+            <!-- Connector line on desktop -->
+            <div class="hidden md:block absolute top-1/2 -right-0.5 w-1.5 h-3 bg-peach/40 rounded-full -translate-y-1/2"></div>
+          </div>
+
+          <!-- V2 -->
+          <div class="reveal group relative" style="transition-delay:.1s">
+            <div class="glass rounded-2xl p-6 h-full flex flex-col">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-wider border border-peach/60 bg-peach/10 text-peach px-2 py-0.5 rounded-full">V2</span>
+                <span class="text-[10px] font-mono font-bold tracking-wider text-muted uppercase">AI-Assisted</span>
+              </div>
+              <p class="text-sm text-muted leading-relaxed mb-4 flex-1">Expanded to 36 countries with CSV export, structured data, and real-time progress tracking — driven by human directives.</p>
+              <code class="text-xs text-peach font-mono">Request2.py</code>
+            </div>
+            <div class="hidden md:block absolute top-1/2 -right-0.5 w-1.5 h-3 bg-pink/40 rounded-full -translate-y-1/2"></div>
+          </div>
+
+          <!-- V3 -->
+          <div class="reveal group relative" style="transition-delay:.2s">
+            <div class="glass rounded-2xl p-6 h-full flex flex-col">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-wider border border-purple/60 bg-purple/10 text-purple px-2 py-0.5 rounded-full">V3</span>
+                <span class="text-[10px] font-mono font-bold tracking-wider text-muted uppercase">AI-Assisted</span>
+              </div>
+              <p class="text-sm text-muted leading-relaxed mb-4 flex-1">Live currency conversion layer with caching, turning raw CSV data into actionable EUR-priced reports.</p>
+              <code class="text-xs text-purple font-mono">price_converter.py</code>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="stat">
-        <div class="stat-title text-base-content/60">Currencies</div>
-        <div class="stat-value text-primary">30+</div>
-        <div class="stat-desc text-base-content/40">auto-converted to EUR</div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="py-20 border-t border-white/5">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+          <h2 class="headline text-3xl md:text-4xl font-bold mb-4">Features</h2>
+          <p class="text-muted">Everything needed to scrape, structure, and analyze App Store pricing data.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="reveal glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:0s">
+            <div class="w-10 h-10 rounded-xl bg-peach/10 text-peach flex items-center justify-center">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-lg">36-Country Scraping</h3>
+            <p class="text-muted text-sm leading-relaxed">Fetch in-app purchase prices from Apple's App Store across 36 countries simultaneously with real-time progress tracking.</p>
+          </div>
+
+          <div class="reveal glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:.1s">
+            <div class="w-10 h-10 rounded-xl bg-pink/10 text-pink flex items-center justify-center">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-lg">CSV Export</h3>
+            <p class="text-muted text-sm leading-relaxed">Structured data export with country, name, price, price_formatted, and currency columns. Ready for analysis in Excel or pandas.</p>
+          </div>
+
+          <div class="reveal glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:.2s">
+            <div class="w-10 h-10 rounded-xl bg-purple/10 text-purple flex items-center justify-center">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-lg">Currency Conversion</h3>
+            <p class="text-muted text-sm leading-relaxed">Automatic EUR conversion via live exchange rates with intelligent caching to avoid redundant API calls.</p>
+          </div>
+
+          <div class="reveal glass rounded-2xl p-8 flex flex-col gap-4" style="transition-delay:.3s">
+            <div class="w-10 h-10 rounded-xl bg-peach/10 text-peach flex items-center justify-center">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-lg">Error Resilience</h3>
+            <p class="text-muted text-sm leading-relaxed">Graceful handling of unavailable apps, API timeouts, retries, and missing data per country. Never crashes on edge cases.</p>
+          </div>
+
+          <div class="reveal glass rounded-2xl p-8 flex flex-col gap-4 md:col-span-2 max-w-md mx-auto w-full" style="transition-delay:.4s">
+            <div class="w-10 h-10 rounded-xl bg-pink/10 text-pink flex items-center justify-center">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-lg">Zero Config</h3>
+            <p class="text-muted text-sm leading-relaxed">Edit one variable to target any App Store app. No API keys, no authentication, no external services needed.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUICK START -->
+    <section id="quick-start" class="py-20 border-t border-white/5">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+          <h2 class="headline text-3xl md:text-4xl font-bold mb-4">Quick Start</h2>
+          <p class="text-muted">Get scraping in under 60 seconds.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Panel Left -->
+          <div class="reveal glass rounded-2xl overflow-hidden flex flex-col group" style="transition-delay:0s">
+            <div class="flex items-center gap-1.5 px-4 py-3 bg-surface border-b border-white/5 rounded-t-2xl">
+              <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+              <span class="text-[10px] text-muted ml-2 font-mono uppercase tracking-wider">Setup</span>
+              <button onclick="copy('setup-cmd')" class="ml-auto text-muted hover:text-peach transition-colors p-1 opacity-0 group-hover:opacity-100" aria-label="Copy setup commands">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+            <pre id="setup-cmd" class="p-6 text-sm text-text leading-relaxed overflow-x-auto"><code class="text-purple">git clone</code> https://github.com/Sofian-bll/AppStore-Scraper.git
+<code class="text-purple">cd</code> AppStore-Scraper
+<code class="text-peach">pip install</code> -r requirements.txt</pre>
+          </div>
+          <!-- Panel Right -->
+          <div class="reveal glass rounded-2xl overflow-hidden flex flex-col group" style="transition-delay:.1s">
+            <div class="flex items-center gap-1.5 px-4 py-3 bg-surface border-b border-white/5 rounded-t-2xl">
+              <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+              <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+              <span class="text-[10px] text-muted ml-2 font-mono uppercase tracking-wider">Run</span>
+              <button onclick="copy('run-cmd')" class="ml-auto text-muted hover:text-peach transition-colors p-1 opacity-0 group-hover:opacity-100" aria-label="Copy run commands">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+            <pre id="run-cmd" class="p-6 text-sm text-text leading-relaxed overflow-x-auto"><span class="text-muted"># Scrape prices across 36 countries</span>
+<code class="text-peach">python</code> Request2.py
+
+<span class="text-muted"># Convert all prices to EUR</span>
+<code class="text-purple">python</code> price_converter.py</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section class="py-16 border-t border-white/5">
+      <div class="max-w-6xl mx-auto px-6 text-center reveal">
+        <div class="flex flex-wrap gap-3 justify-center">
+          <a href="https://github.com/Sofian-bll/AppStore-Scraper" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs font-mono text-muted hover:text-text transition-colors px-4 py-2 rounded-full border border-border hover:border-peach/30">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://github.com/Sofian-bll/AppStore-Scraper/releases" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs font-mono text-muted hover:text-text transition-colors px-4 py-2 rounded-full border border-border hover:border-peach/30">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-1"/><polygon points="12 15 17 21 7 21 12 15"/></svg>
+            Releases
+          </a>
+          <a href="https://github.com/Sofian-bll/AppStore-Scraper/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs font-mono text-muted hover:text-text transition-colors px-4 py-2 rounded-full border border-border hover:border-peach/30">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            MIT License
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 py-8 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
+      <div>
+        MIT License &copy; 2026 Sofian
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Python</span>
+        <span class="text-border">+</span>
+        <span>Apple App Store API</span>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- STORY -->
-<section class="py-24 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-6 w-full reveal">
-  <div class="text-center mb-16">
-    <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase text-base-content">Project Evolution</h2>
-    <p class="text-base-content/50 mt-4 max-w-xl mx-auto">Built during the 2nd week of learning Python — a journey from hand-coded foundations to AI-assisted scaling.</p>
-  </div>
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const html = document.documentElement;
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="card bg-base-200 border border-base-300 reveal" style="transition-delay: 0s">
-      <div class="card-body">
-        <div class="badge badge-sm badge-outline mb-3 w-fit">V1</div>
-        <h3 class="card-title text-lg">Hand-Coded</h3>
-        <p class="text-base-content/60 text-sm">Original single-country scraper with console output. Built from scratch as a Python learning exercise.</p>
-        <code class="text-xs text-peach mt-2 bg-base-300 px-2 py-1 rounded">request.py</code>
-      </div>
-    </div>
-    <div class="card bg-base-200 border border-primary/30 reveal" style="transition-delay: .1s">
-      <div class="card-body">
-        <div class="badge badge-sm badge-primary mb-3 w-fit">V2</div>
-        <h3 class="card-title text-lg">AI-Assisted</h3>
-        <p class="text-base-content/60 text-sm">Expanded to 36 countries with CSV export, structured data, and real-time progress tracking — driven by human directives.</p>
-        <code class="text-xs text-peach mt-2 bg-base-300 px-2 py-1 rounded">Request2.py</code>
-      </div>
-    </div>
-    <div class="card bg-base-200 border border-secondary/30 reveal" style="transition-delay: .2s">
-      <div class="card-body">
-        <div class="badge badge-sm badge-secondary mb-3 w-fit">V3</div>
-        <h3 class="card-title text-lg">AI-Assisted</h3>
-        <p class="text-base-content/60 text-sm">Live currency conversion layer with caching, turning raw CSV data into actionable EUR-priced reports.</p>
-        <code class="text-xs text-purple mt-2 bg-base-300 px-2 py-1 rounded">price_converter.py</code>
-      </div>
-    </div>
-  </div>
-</section>
+    function setTheme(isLight) {
+      if (isLight) {
+        html.classList.add('light');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        html.classList.remove('light');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
 
-<!-- FEATURES -->
-<section class="py-24 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-6 w-full reveal">
-  <div class="text-center mb-16">
-    <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase text-base-content">Features</h2>
-  </div>
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="card bg-base-200 border border-base-300 hover:border-primary transition-colors reveal" style="transition-delay: 0s">
-      <div class="card-body">
-        <h3 class="card-title text-primary">36-Country Scraping</h3>
-        <p class="text-base-content/60 text-sm">Fetch in-app purchase prices from Apple's App Store across 36 countries simultaneously.</p>
-      </div>
-    </div>
-    <div class="card bg-base-200 border border-base-300 hover:border-primary transition-colors reveal" style="transition-delay: .1s">
-      <div class="card-body">
-        <h3 class="card-title text-primary">CSV Export</h3>
-        <p class="text-base-content/60 text-sm">Structured data export with country, name, price, price_formatted, and currency columns.</p>
-      </div>
-    </div>
-    <div class="card bg-base-200 border border-base-300 hover:border-primary transition-colors reveal" style="transition-delay: .2s">
-      <div class="card-body">
-        <h3 class="card-title text-primary">Progress Tracking</h3>
-        <p class="text-base-content/60 text-sm">Real-time progress bar showing country-by-country fetch status with completion percentages.</p>
-      </div>
-    </div>
-    <div class="card bg-base-200 border border-base-300 hover:border-primary transition-colors reveal" style="transition-delay: .3s">
-      <div class="card-body">
-        <h3 class="card-title text-primary">Currency Conversion</h3>
-        <p class="text-base-content/60 text-sm">Automatic EUR conversion via live exchange rates with intelligent caching for performance.</p>
-      </div>
-    </div>
-    <div class="card bg-base-200 border border-base-300 hover:border-primary transition-colors reveal" style="transition-delay: .4s">
-      <div class="card-body">
-        <h3 class="card-title text-primary">Error Resilience</h3>
-        <p class="text-base-content/60 text-sm">Graceful handling of unavailable apps, API timeouts, retries, and missing data per country.</p>
-      </div>
-    </div>
-    <div class="card bg-base-200 border border-base-300 hover:border-primary transition-colors reveal" style="transition-delay: .5s">
-      <div class="card-body">
-        <h3 class="card-title text-primary">Zero Config</h3>
-        <p class="text-base-content/60 text-sm">Edit one variable to target any App Store app. Modify the country list as needed.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    themeToggle.addEventListener('click', () => {
+      const isLight = !html.classList.contains('light');
+      setTheme(isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
 
-<!-- QUICK START -->
-<section id="quick-start" class="py-24 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-6 w-full reveal">
-  <div class="text-center mb-16">
-    <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase text-base-content">Quick Start</h2>
-    <p class="text-base-content/50 mt-4">Get scraping in under 60 seconds.</p>
-  </div>
+    // Copy to clipboard
+    async function copy(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const text = el.innerText.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        const btn = event.currentTarget;
+        const original = btn.innerHTML;
+        btn.innerHTML = '<svg class="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+        setTimeout(() => btn.innerHTML = original, 1800);
+      } catch (err) {
+        console.error('Failed to copy');
+      }
+    }
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="relative group">
-      <button onclick="copyToClipboard(this)" class="btn btn-ghost btn-xs absolute top-3 right-3 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity z-10">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-      </button>
-      <div class="mockup-code bg-neutral text-neutral-content h-full">
-        <pre data-prefix="$"><code>git clone <span class="text-purple">https://github.com/Sofian-bll/App-Store-Price---Scraper-v2.git</span></code></pre>
-        <pre data-prefix="$"><code>cd <span class="text-purple">App-Store-Price---Scraper-v2</span></code></pre>
-        <pre data-prefix="$"><code>pip install <span class="text-peach">-r requirements.txt</span></code></pre>
-      </div>
-    </div>
-    <div class="relative group">
-      <button onclick="copyToClipboard(this)" class="btn btn-ghost btn-xs absolute top-3 right-3 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity z-10">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-      </button>
-      <div class="mockup-code bg-neutral text-neutral-content h-full">
-        <pre data-prefix="$"><code>python <span class="text-peach">Request2.py</span></code></pre>
-        <pre data-prefix="//"><code>🌍 Fetching country 1/36 (2.8%): US</code></pre>
-        <pre data-prefix="//"><code>🌍 Fetching country 36/36 (100.0%): NG</code></pre>
-        <pre data-prefix="$"><code>python <span class="text-peach">price_converter.py</span></code></pre>
-        <pre data-prefix="//"><code>✅ Conversion of 48 lines complete</code></pre>
-      </div>
-    </div>
-  </div>
-</section>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
-<!-- DEPLOY -->
-<section class="py-24 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-6 w-full text-center reveal">
-  <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase text-base-content mb-8">Links</h2>
-  <div class="flex flex-wrap gap-3 justify-center">
-    <a href="https://github.com/Sofian-bll/App-Store-Price---Scraper-v2" class="btn btn-outline btn-sm gap-2" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-      GitHub
-    </a>
-    <a href="https://github.com/Sofian-bll/App-Store-Price---Scraper-v2/releases" class="btn btn-outline btn-sm gap-2" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-1"/><polygon points="12 15 17 21 7 21 12 15"/></svg>
-      Releases
-    </a>
-    <a href="https://github.com/Sofian-bll/App-Store-Price---Scraper-v2/blob/main/LICENSE" class="btn btn-outline btn-sm gap-2" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      License
-    </a>
-  </div>
-</section>
-
-</main>
-
-<!-- FOOTER -->
-<footer class="footer items-center p-4 bg-base-200 text-base-content border-t border-base-300">
-  <div class="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-6 w-full flex flex-col sm:flex-row items-center justify-between gap-2">
-    <span class="text-base-content/60 text-sm">MIT License &copy; 2026</span>
-    <a href="https://github.com/Sofian-bll/App-Store-Price---Scraper-v2" class="btn btn-ghost btn-sm" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-      GitHub
-    </a>
-  </div>
-</footer>
-
-<script>
-function copyToClipboard(btn) {
-  const code = btn.parentElement.querySelector('.mockup-code');
-  if (!code) return;
-  const text = Array.from(code.querySelectorAll('pre code'))
-    .map(el => el.textContent.trim())
-    .join('\n');
-  navigator.clipboard.writeText(text).then(() => {
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
-    setTimeout(() => {
-      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
-    }, 1500);
-  });
-}
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
