@@ -1,8 +1,8 @@
 <div align="center">
 
-[![License: MIT](https://img.shields.io/github/license/Sofian-bll/App-Store-Price---Scraper-v2?style=for-the-badge)](https://github.com/Sofian-bll/App-Store-Price---Scraper-v2/blob/main/LICENSE)
-[![Version](https://img.shields.io/github/v/release/Sofian-bll/App-Store-Price---Scraper-v2?style=for-the-badge)](https://github.com/Sofian-bll/App-Store-Price---Scraper-v2/releases)
-[![Stars](https://img.shields.io/github/stars/Sofian-bll/App-Store-Price---Scraper-v2?style=for-the-badge)](https://github.com/Sofian-bll/App-Store-Price---Scraper-v2/stargazers)
+[![License: MIT](https://img.shields.io/github/license/Sofian-bll/AppStore-Scraper?style=for-the-badge)](https://github.com/Sofian-bll/AppStore-Scraper/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/Sofian-bll/AppStore-Scraper?style=for-the-badge)](https://github.com/Sofian-bll/AppStore-Scraper/releases)
+[![Stars](https://img.shields.io/github/stars/Sofian-bll/AppStore-Scraper?style=for-the-badge)](https://github.com/Sofian-bll/AppStore-Scraper/stargazers)
 
 > [Read in English](README.md) | [Lire en Francais](README.fr.md)
 
@@ -90,6 +90,6 @@ MIT — voir [LICENSE](LICENSE) pour plus de details.
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Sofian-bll/App-Store-Price---Scraper-v2&type=Date)](https://star-history.com/#Sofian-bll/App-Store-Price---Scraper-v2&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Sofian-bll/AppStore-Scraper&type=Date)](https://star-history.com/#Sofian-bll/AppStore-Scraper&Date)
 
 </div>
