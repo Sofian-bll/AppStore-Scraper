@@ -1,21 +1,21 @@
 <div align="center">
 
+> [Read in English](README.md) | [Lire en Francais](README.fr.md)
+
 [![License: MIT](https://img.shields.io/github/license/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/blob/main/LICENSE)
 [![Version](https://img.shields.io/github/v/release/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/releases)
 [![Stars](https://img.shields.io/github/stars/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/stargazers)
-<br>
+
+<p align="center">
+  <img src="docs/assets/logo.png" alt="App Store Price Scraper Logo" width="160"/>
+</p>
+
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white)
 ![Requests](https://img.shields.io/badge/requests-%23000000.svg?style=flat&logo=python&logoColor=white)
 ![API](https://img.shields.io/badge/API-%23FF6B6B.svg?style=flat&logo=fastapi&logoColor=white)
 
-> [Read in English](README.md) | [Lire en Francais](README.fr.md)
-
 </div>
-
-<p align="center">
-  <img src="docs/assets/logo.png" alt="App Store Price Scraper Logo" width="160"/>
-</p>
 
 # App Store Price Scraper
 
