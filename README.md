@@ -15,27 +15,7 @@
 
 <p align="center">🇬🇧 <a href="README.md"><b>English</b></a> · 🇫🇷 <a href="README.fr.md">Français</a></p>
 
-[Explore docs](docs/) · [Report Bug](https://github.com/Sofian-bll/AppStore-Scraper/issues) · [Request Feature](https://github.com/Sofian-bll/AppStore-Scraper/issues)
-
 </div>
-
-<details open>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#what-is-this">What is this?</a></li>
-    <li><a href="#how-it-works">How It Works</a></li>
-    <li><a href="#built-with">Built With</a></li>
-    <li><a href="#quick-start">Quick Start</a></li>
-    <li><a href="#project-structure">Project Structure</a></li>
-    <li><a href="#documentation">Documentation</a></li>
-    <li><a href="#project-evolution">Project Evolution</a></li>
-    <li><a href="#configuration">Configuration</a></li>
-    <li><a href="#output-format">Output Format</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#author">Author</a></li>
-    <li><a href="#license">License</a></li>
-  </ol>
-</details>
 
 ## What is this?
 
@@ -45,26 +25,21 @@ A Python tool that scrapes in-app purchase pricing data from Apple's App Store A
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## How It Works
+## Features
 
-```mermaid
-graph LR
-    A[App Store API] --> B(request.py<br/>Scraper v1)
-    A --> C(Request2.py<br/>Scraper v2)
-    B --> D[CSV Output]
-    C --> D
-    D --> E(price_converter.py<br/>EUR Conversion)
-    E --> F[Final CSV]
-```
+- **36 countries** — queries Apple's App Store API across 36 storefronts in a single run
+- **30+ currencies** — captures local pricing in each country's native currency
+- **CSV export** — structured output with country, product name, price, and currency per row
+- **EUR conversion** — real-time exchange rate conversion with request caching
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Built With
 
-- [![Python][python-shield]](https://www.python.org/) — Core language
-- [![Pandas][pandas-shield]](https://pandas.pydata.org/) — Data manipulation and CSV export
-- [![Requests][requests-shield]](https://requests.readthedocs.io/) — HTTP client for App Store API
-- [![API][api-shield]](https://www.exchangerate-api.com/) — Real-time currency conversion
+- [![Python][python-shield]](https://www.python.org/)
+- [![Pandas][pandas-shield]](https://pandas.pydata.org/)
+- [![Requests][requests-shield]](https://requests.readthedocs.io/)
+- [![API][api-shield]](https://www.exchangerate-api.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -83,56 +58,6 @@ python price_converter.py
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Project Structure
-
-```
-.
-├── App Price/              # Output CSV data
-│   ├── Chat-Gpt Price.csv
-│   ├── Claude Price.csv
-│   └── Raycast Price.csv
-├── docs/                   # Documentation and landing page
-│   └── assets/
-│       └── logo.png
-├── LICENSE
-├── README.md
-├── README.fr.md
-├── Request2.py             # Enhanced multi-country scraper (v2)
-├── price_converter.py      # Currency conversion to EUR
-├── request.py              # Original single-country scraper (v1)
-└── requirements.txt
-```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Documentation
-
-| File | Description |
-|------|-------------|
-| [`request.py`](request.py) | Original v1 — single-country scraper with console output. Hand-coded from scratch. |
-| [`Request2.py`](Request2.py) | Enhanced v2 — 36 countries, CSV export, real-time progress bar. AI-assisted with human directives. |
-| [`price_converter.py`](price_converter.py) | Currency conversion to EUR with live exchange rates and caching. AI-assisted with human directives. |
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Project Evolution
-
-1. **V1** (`request.py`) — Original script, hand-coded entirely by the author
-2. **V2** (`Request2.py`) — Major improvements with AI guidance: multi-country, CSV export, progress tracking
-3. **Extension** (`price_converter.py`) — Currency conversion layer added with AI assistance
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Configuration
-
-| Variable | File | Line | Description |
-|----------|------|------|-------------|
-| `app_id` | `Request2.py` | 37 | Target app ID to scrape |
-| `country_codes` | `Request2.py` | 38-42 | Countries to query |
-| `to_currency` | `price_converter.py` | – | Target currency (default: EUR) |
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Output Format
 
 | Column | Source | Description |
@@ -146,20 +71,11 @@ python price_converter.py
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Contributing
+## Project Evolution
 
-Contributions are welcome. Open an issue to discuss what you'd like to change, or submit a pull request directly.
-
-<a href="https://github.com/Sofian-bll/AppStore-Scraper/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Sofian-bll/AppStore-Scraper" />
-</a>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Author
-
-- **Original script** (`request.py`): Developed entirely by hand
-- **Enhancements** (`Request2.py`, `price_converter.py`): Developed with AI assistance and human directives
+1. **V1** (`request.py`) — single-country scraper with console output. Hand-coded entirely from scratch during week 2 of learning Python.
+2. **V2** (`Request2.py`) — 36 countries, CSV export, real-time progress bar. AI-assisted with human direction.
+3. **Extension** (`price_converter.py`) — real-time EUR conversion with request caching. AI-assisted, built on top of existing codebase.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
