@@ -1,8 +1,13 @@
 <div align="center">
 
-[![License: MIT](https://img.shields.io/github/license/Sofian-bll/AppStore-Scraper?style=for-the-badge)](https://github.com/Sofian-bll/AppStore-Scraper/blob/main/LICENSE)
-[![Version](https://img.shields.io/github/v/release/Sofian-bll/AppStore-Scraper?style=for-the-badge)](https://github.com/Sofian-bll/AppStore-Scraper/releases)
-[![Stars](https://img.shields.io/github/stars/Sofian-bll/AppStore-Scraper?style=for-the-badge)](https://github.com/Sofian-bll/AppStore-Scraper/stargazers)
+[![License: MIT](https://img.shields.io/github/license/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/releases)
+[![Stars](https://img.shields.io/github/stars/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/stargazers)
+<br>
+![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white)
+![Requests](https://img.shields.io/badge/requests-%23000000.svg?style=flat&logo=python&logoColor=white)
+![API](https://img.shields.io/badge/API-%23FF6B6B.svg?style=flat&logo=fastapi&logoColor=white)
 
 > [Read in English](README.md) | [Lire en Francais](README.fr.md)
 
@@ -14,13 +19,33 @@
 
 # App Store Price Scraper
 
-Collect and analyze in-app purchase prices from Apple's App Store across countries and currencies.
+Collect and analyze in-app purchase prices from Apple's App Store across 36 countries and 30+ currencies — with real-time EUR conversion.
 
 ## What is this?
 
-A Python tool that scrapes in-app purchase pricing data from Apple's App Store API for any app, across 36 countries. It exports structured CSV data and includes real-time currency conversion to euros.
+A Python tool that scrapes in-app purchase pricing data from Apple's App Store API for any app, across 36 countries. It exports structured CSV data and includes real-time currency conversion to euros via the Exchange Rate API.
 
-> Note: This project was built during my 2nd week of learning Python.
+> Built during my 2nd week of learning Python — from hand-coded prototype to AI-assisted multi-layer tool.
+
+## Features
+
+- **36 Countries** — Coverage across all major App Store regions (US, EU, Asia, Middle East)
+- **CSV Export** — Structured output with country, name, price, and currency columns
+- **Currency Conversion** — Real-time EUR conversion with live exchange rates and caching
+- **Progress Tracking** — Real-time progress bar during scraping operations
+
+## Quick Start
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Scrape in-app purchases for 36 countries (edit app_id in Request2.py)
+python Request2.py
+
+# Convert prices to euros
+python price_converter.py
+```
 
 ## Files & Attribution
 
@@ -36,19 +61,6 @@ A Python tool that scrapes in-app purchase pricing data from Apple's App Store A
 2. **V2** (`Request2.py`) — Major improvements with AI guidance: multi-country, CSV export, progress tracking
 3. **Extension** (`price_converter.py`) — Currency conversion layer added with AI assistance
 
-## Quick Start
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Scrape in-app purchases for 36 countries (edit app_id in Request2.py)
-python Request2.py
-
-# Convert prices to euros
-python price_converter.py
-```
-
 ## Project Structure
 
 ```
@@ -57,7 +69,7 @@ python price_converter.py
 │   ├── Chat-Gpt Price.csv
 │   ├── Claude Price.csv
 │   └── Raycast Price.csv
-├── docs/                   # Documentation and site
+├── docs/                   # Documentation and landing page
 │   └── assets/
 │       └── logo.png
 ├── LICENSE
