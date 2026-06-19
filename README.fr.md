@@ -1,7 +1,5 @@
 <div align="center">
 
-> [Read in English](README.md) | [Lire en Francais](README.fr.md)
-
 [![Licence: MIT](https://img.shields.io/github/license/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/blob/main/LICENSE)
 [![Version](https://img.shields.io/github/v/release/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/releases)
 [![Stars](https://img.shields.io/github/stars/Sofian-bll/AppStore-Scraper?style=flat)](https://github.com/Sofian-bll/AppStore-Scraper/stargazers)
@@ -11,14 +9,11 @@
 </p>
 
 <a id="readme-top"></a>
-# App Store Price Scraper
+<h1 align="center">App Store Price Scraper</h1>
 
-Collecte et analyse les prix des achats in-app depuis l'App Store d'Apple a travers 36 pays et 30+ devises — avec conversion en euros en temps reel.
+<p align="center">Collecte et analyse les prix des achats in-app depuis l'App Store d'Apple a travers 36 pays et 30+ devises — avec conversion en euros en temps reel.</p>
 
-![Python][python-shield]
-![Pandas][pandas-shield]
-![Requests][requests-shield]
-![API][api-shield]
+<p align="center">🇬🇧 <a href="README.md">English</a> · 🇫🇷 <a href="README.fr.md"><b>Français</b></a></p>
 
 [Explorer la doc](docs/) · [Signaler un bug](https://github.com/Sofian-bll/AppStore-Scraper/issues) · [Proposer une fonctionnalite](https://github.com/Sofian-bll/AppStore-Scraper/issues)
 
@@ -28,6 +23,7 @@ Collecte et analyse les prix des achats in-app depuis l'App Store d'Apple a trav
   <summary>Table des matieres</summary>
   <ol>
     <li><a href="#cest-quoi-">C'est quoi ?</a></li>
+    <li><a href="#comment-ca-marche">Comment ca marche</a></li>
     <li><a href="#construit-avec">Construit avec</a></li>
     <li><a href="#demarrage-rapide">Demarrage rapide</a></li>
     <li><a href="#structure-du-projet">Structure du projet</a></li>
@@ -49,12 +45,26 @@ Un outil Python qui scrape les prix des achats in-app depuis l'API de l'App Stor
 
 <p align="right">(<a href="#readme-top">retour en haut</a>)</p>
 
+## Comment ca marche
+
+```mermaid
+graph LR
+    A[App Store API] --> B(request.py<br/>Scraper v1)
+    A --> C(Request2.py<br/>Scraper v2)
+    B --> D[CSV Output]
+    C --> D
+    D --> E(price_converter.py<br/>Conversion EUR)
+    E --> F[CSV Final]
+```
+
+<p align="right">(<a href="#readme-top">retour en haut</a>)</p>
+
 ## Construit avec
 
-- [Python](https://www.python.org/) — Langage principal
-- [Pandas](https://pandas.pydata.org/) — Manipulation de donnees et export CSV
-- [Requests](https://requests.readthedocs.io/) — Client HTTP pour l'API App Store
-- [Exchange Rate API](https://www.exchangerate-api.com/) — Conversion de devises en temps reel
+- [![Python][python-shield]](https://www.python.org/) — Langage principal
+- [![Pandas][pandas-shield]](https://pandas.pydata.org/) — Manipulation de donnees et export CSV
+- [![Requests][requests-shield]](https://requests.readthedocs.io/) — Client HTTP pour l'API App Store
+- [![API][api-shield]](https://www.exchangerate-api.com/) — Conversion de devises en temps reel
 
 <p align="right">(<a href="#readme-top">retour en haut</a>)</p>
 
@@ -115,13 +125,24 @@ python price_converter.py
 
 ## Configuration
 
-Modifier `app_id` dans `Request2.py` (ligne 37) pour cibler une autre application. Modifier `country_codes` (lignes 38-42) pour ajouter ou retirer des pays. Dans `price_converter.py`, changer `to_currency` pour convertir vers une autre devise cible.
+| Variable | Fichier | Ligne | Description |
+|----------|---------|-------|-------------|
+| `app_id` | `Request2.py` | 37 | ID de l'app a scraper |
+| `country_codes` | `Request2.py` | 38-42 | Pays a interroger |
+| `to_currency` | `price_converter.py` | – | Devise cible (defaut : EUR) |
 
 <p align="right">(<a href="#readme-top">retour en haut</a>)</p>
 
 ## Format de sortie
 
-Colonnes CSV : `country`, `name`, `price`, `price_formatted`, `currency`, `price_eur` (ajoute par `price_converter.py`).
+| Colonne | Source | Description |
+|---------|--------|-------------|
+| `country` | `Request2.py` | Nom du pays |
+| `name` | `Request2.py` | Nom du produit |
+| `price` | `Request2.py` | Prix brut (numerique) |
+| `price_formatted` | `Request2.py` | Prix formate (ex. `4,99 $`) |
+| `currency` | `Request2.py` | Code devise (ex. `USD`) |
+| `price_eur` | `price_converter.py` | Prix converti en EUR |
 
 <p align="right">(<a href="#readme-top">retour en haut</a>)</p>
 
