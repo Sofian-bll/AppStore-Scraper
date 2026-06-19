@@ -20,6 +20,22 @@ Collect and analyze in-app purchase prices from Apple's App Store across countri
 
 A Python tool that scrapes in-app purchase pricing data from Apple's App Store API for any app, across 36 countries. It exports structured CSV data and includes real-time currency conversion to euros.
 
+> Note: This project was built during my 2nd week of learning Python.
+
+## Files & Attribution
+
+| File | Author | Description |
+|------|--------|-------------|
+| `request.py` | Hand-coded from scratch | Original v1 — single-country scraper with console output |
+| `Request2.py` | AI-assisted (human directives) | Enhanced v2 — 36 countries, CSV export, real-time progress bar |
+| `price_converter.py` | AI-assisted (human directives) | Currency conversion to EUR with live exchange rates and caching |
+
+## Project Evolution
+
+1. **V1** (`request.py`) — Original script, hand-coded entirely by the author
+2. **V2** (`Request2.py`) — Major improvements with AI guidance: multi-country, CSV export, progress tracking
+3. **Extension** (`price_converter.py`) — Currency conversion layer added with AI assistance
+
 ## Quick Start
 
 ```bash
@@ -60,6 +76,11 @@ Edit `app_id` in `Request2.py` (line 37) to target a different app. Modify `coun
 ## Output Format
 
 CSV columns: `country`, `name`, `price`, `price_formatted`, `currency`, `price_eur` (added by price_converter.py).
+
+## Author
+
+- **Original script** (`request.py`): Developed entirely by hand
+- **Enhancements** (`Request2.py`, `price_converter.py`): Developed with AI assistance and human directives
 
 ## License
 

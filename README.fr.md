@@ -20,6 +20,22 @@ Collectez et analysez les prix des achats integres du App Store d'Apple a traver
 
 Un outil Python qui recupere les donnees de prix des achats integres depuis l'API App Store d'Apple pour n'importe quelle application, dans 36 pays. Il exporte les donnees en CSV structure et inclut la conversion des devises en euros en temps reel.
 
+> Note: Au moment de ce projet, j'etais a ma 2e semaine d'apprentissage de Python.
+
+## Fichiers et Attribution
+
+| Fichier | Auteur | Description |
+|---------|--------|-------------|
+| `request.py` | Code entierement a la main | V1 originale — scraper mono-pays avec affichage console |
+| `Request2.py` | Assiste par IA (directives humaines) | V2 amelioree — 36 pays, export CSV, barre de progression |
+| `price_converter.py` | Assiste par IA (directives humaines) | Conversion de devises en EUR avec taux de change en direct et cache |
+
+## Evolution du Projet
+
+1. **V1** (`request.py`) — Script original, developpe entierement a la main par l'auteur
+2. **V2** (`Request2.py`) — Ameliorations majeures avec l'aide de l'IA : multi-pays, CSV, progression
+3. **Extension** (`price_converter.py`) — Couche de conversion de devises ajoutee avec l'assistance IA
+
 ## Demarrage Rapide
 
 ```bash
@@ -60,6 +76,11 @@ Modifiez `app_id` dans `Request2.py` (ligne 37) pour cibler une autre applicatio
 ## Format de Sortie
 
 Colonnes CSV : `country`, `name`, `price`, `price_formatted`, `currency`, `price_eur` (ajoute par price_converter.py).
+
+## Auteur
+
+- **Script original** (`request.py`): Developpe entierement a la main
+- **Ameliorations** (`Request2.py`, `price_converter.py`): Developpees avec l'assistance IA et des directives humaines
 
 ## Licence
 
